@@ -1,0 +1,35 @@
+services:
+  sqlserver:
+    container_name: sqlcontainer
+    image: mcr.microsoft.com/azure-sql-edge
+    environment:
+      - MSSQL_SA_PASSWORD=EmpreFunc@100
+      - ACCEPT_EULA=Y
+    volumes:
+      - sql-azure-volumes:/var/opt/mssql
+    ports:
+      - "1433:1433"
+    networks:
+       emprefunc-network:
+           aliases:
+            - "sql"
+
+  api:
+    container_name: empresa-funcionario-api
+    build:
+      context: .
+      dockerfile: EmpresaFuncionario.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:80"
+    depends_on: ["sqlserver"]
+    networks:
+       emprefunc-network:
+
+volumes:
+  sql-azure-volumes:
+
+networks:
+  emprefunc-network:
+    driver: bridge  
