@@ -1,8 +1,10 @@
 # API COM ARQUITETURA EM CAMADAS 
 
-.NET7
-.SQLSERVER
-.DOCKER
+- [.NET 7]
+- [Entity Framework Core]
+- [SQL Server]
+- [Migration]
+- [Docker]
 
 
 ## CONTEINERIZAR PROJETO
